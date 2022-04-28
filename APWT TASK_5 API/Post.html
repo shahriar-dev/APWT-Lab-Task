@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">  
+	<title>Api Test</title>
+
+</head>
+<body class="container">
+        
+ 
+    <h1 align="center" style="color:#c41d44;">DOT Intenet </h1>
+<form action="http://127.0.0.1:8000/api/user/post" class="col-md-6" method="post">
+        
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" value="" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" id="email" name="email" value=""class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="text" id="phone" name="phone" value=""class="form-control">
+        </div>
+        
+        <div class="form-group">
+            <label for="nid">NID</label>
+            <input type="text" id="nid" name="nid" value=""class="form-control">
+        </div>
+
+
+        <div class="form-group">
+            <label for="package">Choose a Package</label>
+
+        <select name="package" id="package">
+        <option value="5" id="package">5 Mbps</option>
+        <option value="10" id="package" >10 Mbps</option>
+        <option value="20" id="package">20 Mbps</option>
+         <option value="50" id="package">50 Mbps</option>
+        </select>
+        </div>
+
+        <button type="button" onclick=loadDoc() class="btn btn-primary"> Submit</button>
+    </form>
+
+    <script>
+        function loadDoc(){
+        const xhttp = new XMLHttpRequest();
+        var data=[];
+            data = {
+                        Name: document.getElementById("name").value,
+                        Email: document.getElementById("email").value,
+                        Phone: document.getElementById("phone").value,
+                        NID: document.getElementById("nid").value,
+                        Package: document.getElementById("package").value
+                    };
+                  
+                    console.log(JSON.stringify(data));
+      xhttp.open("post", "http://127.0.0.1:8000/api/user/post");
+      xhttp.setRequestHeader('Content-Type', 'application/json');
+      xhttp.responseType = 'json';
+      xhttp.send(JSON.stringify(data));
+      xhttp.onload = () => {
+      console.log(xhttp.response);
+      };
+
+    }
+        
+        </script>
+    
+
+</body>
+</html>

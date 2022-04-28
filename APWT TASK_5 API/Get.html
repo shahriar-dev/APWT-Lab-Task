@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">  
+	<title>Api Get Test</title>
+</head>
+<body class="container" onload="loadDoc()">
+<h1 align="center" style="color:#c41d44;">DOT Intenet </h1>
+<table class="table table-borded">
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>NID</th>
+        <th>Package</th>
+    </tr>
+        <tr>
+            
+            <td id="name"></td>
+            <td id="email"></td>
+            <td id="phone"></td>
+            <td id="nid"></td>
+			<td id="package"></td>
+        </tr>
+	</table>
+
+<script>
+		function loadDoc(){
+			const xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function(){
+				if(this.readyState == 4 && this.status == 200){
+					var objArr = JSON.parse(this.responseText);
+					console.log(objArr);
+					let x = objArr.length;
+					console.log(x);
+					document.getElementById("name").innerHTML = objArr[0].Name;
+					document.getElementById("email").innerHTML = objArr[0].Email;
+					document.getElementById("phone").innerHTML = objArr[0].Phone;
+                    document.getElementById("nid").innerHTML = objArr[0].NID;
+					document.getElementById("package").innerHTML = objArr[0].Package;
+				}
+			};
+			xhttp.open("GET", "http://127.0.0.1:8000/api/user/list");
+			xhttp.send();
+		}
+	</script>
+
+</body>
+</html>
